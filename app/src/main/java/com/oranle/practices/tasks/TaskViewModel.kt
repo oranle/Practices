@@ -1,10 +1,14 @@
 package com.oranle.practices.tasks
 
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.oranle.practices.SessionApp
 import com.oranle.practices.data.Task
+import kotlinx.coroutines.launch
 import java.util.*
 
 class TaskViewModel: ViewModel() {
@@ -23,9 +27,17 @@ class TaskViewModel: ViewModel() {
     private val _snackBarText = MutableLiveData<String>()
     val snackbarText = _snackBarText
 
+    fun start(context: Context) {
+
+        viewModelScope.launch {
+            val dataBase = ((context.applicationContext) as SessionApp).localDataBase
+            val task = dataBase.taskDao().getTasks()
+
+        }
+
+    }
 
     fun saveTask() {
-
         taskId.value = UUID.randomUUID().toString()
 
         val id = taskId.value
@@ -45,7 +57,6 @@ class TaskViewModel: ViewModel() {
     }
 
     private fun createTask(task: Task) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
 }
