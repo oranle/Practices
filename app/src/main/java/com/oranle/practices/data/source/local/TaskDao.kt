@@ -10,16 +10,16 @@ interface TaskDao {
     suspend fun addTask(task: Task)
 
     @Query("SELECT * FROM tasks")
-    suspend fun getTasks(): Task
+    suspend fun getTasks(): List<Task>
 
-    @Query("SELECT * FROM tasks WHERE entryid = :taskId ")
-    suspend fun getTask(taskId: String): Int
+    @Query("SELECT * FROM tasks WHERE taskId = :taskId ")
+    suspend fun getTask(taskId: String): Task?
 
     @Update
     suspend fun updateTask(task: Task): Int
 
 
-    @Query("DELETE FROM tasks where entryid = :taskId")
-    suspend fun delteTask(taskId: String)
+    @Query("DELETE FROM tasks where taskId = :taskId")
+    suspend fun deleteTask(taskId: String): Int
 
 }
