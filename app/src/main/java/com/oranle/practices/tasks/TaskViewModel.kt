@@ -1,23 +1,19 @@
 package com.oranle.practices.tasks
 
 import android.content.Context
-import android.nfc.Tag
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.oranle.practices.SessionApp
+import com.oranle.practices.base.BaseViewModel
 import com.oranle.practices.data.Task
-import com.oranle.practices.data.source.local.LocalDataBase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.util.*
 
-class TaskViewModel : ViewModel() {
+class TaskViewModel : BaseViewModel() {
 
     val Tag = this.javaClass.simpleName
 
@@ -33,9 +29,7 @@ class TaskViewModel : ViewModel() {
     private val _snackBarText = MutableLiveData<String>()
     val snackbarText = _snackBarText
 
-    fun getDB(context: Context) = ((context.applicationContext) as SessionApp).localDataBase
-
-    fun start(context: Context) {
+    override fun start(context: Context) {
 
         viewModelScope.launch(Dispatchers.IO) {
             val dataBase = getDB(context)
@@ -60,10 +54,7 @@ class TaskViewModel : ViewModel() {
         val content = taskCotent.value
         val state = taskState.value
 
-        Log.d(
-            Tag, "complete task id: ${taskId.value}," +
-                    " ${taskName.value}, ${taskCotent.value}, ${taskState.value}"
-        )
+        Log.d(Tag, "complete task id: ${taskId.value}, ${taskName.value}, ${taskCotent.value}, ${taskState.value}")
 
         if (id == null || name == null || content.isNullOrBlank() || state == null) {
             _snackBarText.value = "complete info first!"
