@@ -35,12 +35,17 @@ class TaskViewModel : BaseViewModel() {
             val dataBase = getDB(context)
 
             val tasks = dataBase.taskDao().getTasks()
-            val task = tasks[tasks.size - 1]
-            taskId.postValue(task.id)
-            taskName.postValue(task.name)
-            taskCotent.postValue(task.content)
-            taskState.postValue(task.isCompleted)
-            Timber.v("${Thread.currentThread().name} task----- $task -----")
+
+            Timber.v("${Thread.currentThread().name} task----- ${tasks.size} -----")
+
+            if (tasks.isNotEmpty() && tasks.size > 1) {
+                val task = tasks[tasks.size - 1]
+                taskId.postValue(task.id)
+                taskName.postValue(task.name)
+                taskCotent.postValue(task.content)
+                taskState.postValue(task.isCompleted)
+                Timber.v("${Thread.currentThread().name} task----- $task -----")
+            }
 
         }
 

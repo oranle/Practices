@@ -3,15 +3,14 @@
 
     <data>
 
-        <variable
-            name="userinfo"
-            type="com.oranle.practices.data.UserInfo" />
-        <variable name="viewmodel"
-            type=""
+        <import type="android.view.View" />
 
+        <variable
+            name="viewmodel"
+            type="com.oranle.practices.login.LoginViewModel" />
     </data>
 
-    <LinearLayout
+    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -24,23 +23,42 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="input user name" />
+            android:hint="input user name"
+            android:text="@={viewmodel.userName}" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="intput password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:text="@={viewmodel.password}" />
 
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:checked="@={viewmodel.remember}"
             android:text="记住密码" />
 
+        <ProgressBar
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:visibility="@{viewmodel.isShowProgress ? View.VISIBLE: View.GONE}" />
+
         <Button
+            android:id="@+id/login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="@{(view) -> viewmodel.onClick(view)}"
             android:text="登录" />
+
+        <Button
+            android:id="@+id/register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{(view) -> viewmodel.onClick(view)}"
+            android:text="注册" />
     </LinearLayout>
 
 

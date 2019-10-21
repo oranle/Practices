@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
 data class UserInfo @JvmOverloads constructor(
 
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id") val id: Int,
+    @ColumnInfo(name = "id") val id: Int = 0,
     @ColumnInfo(name = "userName") val userName: String,
     @ColumnInfo(name = "password") val password: String,
     @ColumnInfo(name = "headUrl") val headUrl: String,

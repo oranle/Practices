@@ -1,7 +1,6 @@
 package com.oranle.practices.data.source.local
 
 import androidx.room.*
-import com.oranle.practices.data.Task
 import com.oranle.practices.data.UserInfo
 
 @Dao
@@ -13,9 +12,8 @@ interface UserDao {
     @Query("SELECT * FROM users")
     suspend fun getUsers(): List<UserInfo>
 
-
     @Query("SELECT * FROM users WHERE id = :id ")
-    suspend fun getUserById(id: Int): Task?
+    suspend fun getUserById(id: Int): UserInfo?
 
     @Update
     suspend fun updateUser(userInfo: UserInfo): Int
