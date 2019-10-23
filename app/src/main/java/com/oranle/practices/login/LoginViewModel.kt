@@ -6,12 +6,11 @@ import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.oranle.practices.MainActivity
 import com.oranle.practices.R
 import com.oranle.practices.base.BaseViewModel
 import com.oranle.practices.data.UserInfo
-import com.oranle.practices.news.NewsActivity
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
@@ -74,9 +73,9 @@ class LoginViewModel : BaseViewModel() {
 
                         Toast.makeText(view.context, "登录成功", Toast.LENGTH_SHORT).show()
 
-//                        view.context.startActivity(Intent(view.context, NewsActivity::class.java))
-
                         kotlinx.coroutines.delay(1000)
+
+                        view.context.startActivity(Intent(view.context, MainActivity::class.java))
 
                         start(view.context)
                     }

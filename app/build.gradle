@@ -117,4 +117,11 @@ dependencies {
     debugImplementation 'com.idescout.sql:sqlscout-server:4.1'
     releaseImplementation 'com.idescout.sql:sqlscout-server-noop:4.1'
 
+    // koin
+    implementation "org.koin:koin-android:1.0.2"
+    // Koin Android Scope feature
+    implementation "org.koin:koin-android-scope:1.0.2"
+    // Koin Android ViewModel feature
+    implementation "org.koin:koin-android-viewmodel:1.0.2"
+
 }
