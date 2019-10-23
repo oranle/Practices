@@ -11,29 +11,33 @@ import com.oranle.practices.base.BaseViewModel
 import com.oranle.practices.data.UserInfo
 import com.oranle.practices.news.NewsActivity
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 
 class LoginViewModel : BaseViewModel() {
 
-    val userName = MutableLiveData<String>()
+    val userName = MutableLiveData<String>("zhangsan")
 
-    val password = MutableLiveData<String>()
+    val password = MutableLiveData<String>("123")
 
-    val remember = MutableLiveData<Boolean>()
+    val remember = MutableLiveData<Boolean>(true)
 
     val isShowProgress = MutableLiveData<Boolean>(false)
 
     override fun start(context: Context) {
         viewModelScope.launch(Dispatchers.IO) {
             val users = getDB(context).getUserDao().getUsers()
-            withContext(UI) {
-                users[0]?.also {
-                    if (it.remember) {
-                        userName.value = it.userName
-                        password.value = it.password
-                        remember.value = it.remember
+            if (users.isNotEmpty()) {
+                withContext(UI) {
+                    kotlinx.coroutines.delay(2000)
+                    users[users.size - 1]?.also {
+                        if (it.remember) {
+                            userName.value = it.userName
+                            password.value = it.password
+                            remember.value = it.remember
+                        }
                     }
                 }
             }
@@ -58,7 +62,7 @@ class LoginViewModel : BaseViewModel() {
                         withContext(IO) {
                             getDB(view.context).getUserDao().insertUser(
                                 UserInfo(
-                                    userName = userName.value!!,
+                                    userName = userName.value!! + "xcy",
                                     password = password.value!!,
                                     headUrl = "http://www.baidu.com",
                                     phoneNum = userName.value!!,
@@ -70,7 +74,11 @@ class LoginViewModel : BaseViewModel() {
 
                         Toast.makeText(view.context, "登录成功", Toast.LENGTH_SHORT).show()
 
-                        view.context.startActivity(Intent(view.context, NewsActivity::class.java))
+//                        view.context.startActivity(Intent(view.context, NewsActivity::class.java))
+
+                        kotlinx.coroutines.delay(1000)
+
+                        start(view.context)
                     }
                 }
             }
