@@ -59,6 +59,13 @@
             android:layout_height="wrap_content"
             android:onClick="@{(view) -> viewmodel.onClick(view)}"
             android:text="注册" />
+
+        <Button
+            android:id="@+id/dialog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{(view) -> viewmodel.onClick(view)}"
+            android:text="滑动选择弹框" />
     </LinearLayout>
 
 

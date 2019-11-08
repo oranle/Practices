@@ -13,7 +13,7 @@ android {
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.oranle.practices"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -124,4 +124,8 @@ dependencies {
     // Koin Android ViewModel feature
     implementation "org.koin:koin-android-viewmodel:1.0.2"
 
+    // refresh
+    implementation "androidx.appcompat:appcompat:$appCompatVersion"
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0'
+    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0'//没有使用特殊Header，可以不加这行
 }
