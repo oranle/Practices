@@ -28,8 +28,8 @@ class RecyclerViewActivity : AppCompatActivity() {
 
     var mAdapter = MyAdapter(this)
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_example_basic)
 
         listView.setAdapter(mAdapter)

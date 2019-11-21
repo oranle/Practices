@@ -50,7 +50,7 @@
             android:id="@+id/login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="@{(view) -> viewmodel.onClick(view)}"
+            android:onClick="onLogin"
             android:text="登录" />
 
         <Button
@@ -66,6 +66,12 @@
             android:layout_height="wrap_content"
             android:onClick="@{(view) -> viewmodel.onClick(view)}"
             android:text="滑动选择弹框" />
+
+        <ImageView
+            android:id="@+id/ic_launcher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_launcher_background"/>
     </LinearLayout>
 
 

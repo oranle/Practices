@@ -1,24 +1,17 @@
 package com.oranle.practices.login
 
 import android.content.Context
-import android.content.DialogInterface
-import android.content.Intent
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.oranle.practices.MainActivity
 import com.oranle.practices.R
 import com.oranle.practices.base.BaseViewModel
 import com.oranle.practices.base.view.WheelView
 import com.oranle.practices.base.view.WheelView.OnWheelViewListener
 import com.oranle.practices.data.UserInfo
-import com.oranle.practices.generated.callback.OnClickListener
-import com.oranle.practices.refresh.RecyclerViewActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -62,9 +55,9 @@ class LoginViewModel : BaseViewModel() {
                 Timber.v("on click login")
 
                 viewModelScope.launch(UI) {
-                    isShowProgress.value = true
+//                    isShowProgress.value = true
 
-                    kotlinx.coroutines.delay(1000)
+//                    kotlinx.coroutines.delay(1000)
 
                     if (userName.value != null && password.value != null && remember.value != null) {
                         withContext(IO) {
@@ -78,20 +71,20 @@ class LoginViewModel : BaseViewModel() {
                                 )
                             )
                         }
-                        isShowProgress.value = false
+//                        isShowProgress.value = false
 
-                        Toast.makeText(view.context, "登录成功", Toast.LENGTH_SHORT).show()
+//                        Toast.makeText(view.context, "登录成功", Toast.LENGTH_SHORT).show()
 
-                        kotlinx.coroutines.delay(1000)
+//                        kotlinx.coroutines.delay(1000)
 
-                        view.context.startActivity(
-                            Intent(
-                                view.context,
-                                RecyclerViewActivity::class.java
-                            )
-                        )
+//                        view.context.startActivity(
+//                            Intent(
+//                                view.context,
+//                                DetailActivity::class.java
+//                            )
+//                        )
 
-                        start(view.context)
+//                        start(view.context)
                     }
                 }
             }
@@ -142,12 +135,10 @@ class LoginViewModel : BaseViewModel() {
 
     fun onLogin() {
 
-
     }
 
     fun saveUser() {
 
     }
-
 
 }
