@@ -1,9 +1,7 @@
 package com.oranle.practices.share_element
 
 import android.os.Bundle
-import android.transition.ChangeBounds
-import android.transition.Slide
-import android.transition.TransitionSet
+import android.transition.*
 import android.view.Gravity
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -17,7 +15,8 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
 
-        ViewCompat.setTransitionName(detail_img, SHARE_IC)
+        ViewCompat.setTransitionName(detail_img, "$SHARE_IC icLauncher")
+        ViewCompat.setTransitionName(desc, "$SHARE_IC text")
 
         window.enterTransition = Slide(Gravity.START)
         window.exitTransition = Slide(Gravity.END)
@@ -25,7 +24,9 @@ class DetailActivity : AppCompatActivity() {
         //设置ShareElementTransition, 指定的share Element会执行这个Transition动画
         val transitionSet = TransitionSet()
         transitionSet.addTransition(ChangeBounds())
+        transitionSet.addTransition(ChangeTransform())
         transitionSet.addTarget(detail_img)
+        transitionSet.addTarget(desc)
 
         window.sharedElementEnterTransition = transitionSet
         window.sharedElementExitTransition = transitionSet

@@ -27,6 +27,7 @@
             android:text="@={viewmodel.userName}" />
 
         <EditText
+            android:id="@+id/text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="intput password"
@@ -71,7 +72,15 @@
             android:id="@+id/ic_launcher"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_launcher_background"/>
+            android:src="@drawable/ic_launcher_background" />
+
+        <TextView
+            android:id="@+id/desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="this is detail"
+            android:textColor="@color/colorPrimary"
+            android:textSize="15sp" />
     </LinearLayout>
 
 

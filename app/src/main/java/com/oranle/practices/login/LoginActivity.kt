@@ -29,7 +29,7 @@ class LoginActivity : AppCompatActivity() {
         requestWindowFeature(Window.FEATURE_CONTENT_TRANSITIONS);
 
         // 设置除了ShareElement外其他元素的退出方式
-        window.exitTransition = Slide(Gravity.LEFT)
+        window.exitTransition = Slide(Gravity.START)
 
         super.onCreate(savedInstanceState)
 
@@ -41,7 +41,8 @@ class LoginActivity : AppCompatActivity() {
             viewmodel = loginViewModel
             lifecycleOwner = this@LoginActivity
 
-            ViewCompat.setTransitionName(icLauncher, SHARE_IC)
+            ViewCompat.setTransitionName(icLauncher, "$SHARE_IC icLauncher")
+            ViewCompat.setTransitionName(desc, "$SHARE_IC text")
         }
 
         loginViewModel.start(this)
@@ -54,10 +55,18 @@ class LoginActivity : AppCompatActivity() {
 
     private fun startAct() {
         val intent = Intent(this, DetailActivity::class.java)
+
         val icLauncherView = binding?.icLauncher as View
-        val pair1 = Pair(icLauncherView, ViewCompat.getTransitionName(icLauncherView))
+        val textView = binding?.desc as View
+
+        val transitionName = ViewCompat.getTransitionName(icLauncherView)
+        val pair1 = Pair(icLauncherView, transitionName)
+
+        val transitionNameText = ViewCompat.getTransitionName(textView)
+        val pair2 = Pair(textView, transitionNameText)
+
         val activityOptionsCompat =
-            ActivityOptionsCompat.makeSceneTransitionAnimation(this, pair1)
+            ActivityOptionsCompat.makeSceneTransitionAnimation(this, pair1, pair2)
         ActivityCompat.startActivity(this, intent, activityOptionsCompat.toBundle())
     }
 
