@@ -22,7 +22,8 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="150dp"
             android:text="this is detail"
-            android:textSize="30sp" />
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="60sp" />
     </LinearLayout>
 
 

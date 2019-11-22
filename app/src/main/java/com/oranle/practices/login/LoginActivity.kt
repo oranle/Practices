@@ -12,6 +12,10 @@ import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
 import androidx.core.view.ViewCompat
 import androidx.databinding.DataBindingUtil
+import com.hw.ycshareelement.YcShareElement
+import com.hw.ycshareelement.transition.IShareElements
+import com.hw.ycshareelement.transition.ShareElementInfo
+import com.hw.ycshareelement.transition.TextViewStateSaver
 import com.oranle.practices.R
 import com.oranle.practices.databinding.LoginLayoutBinding
 import com.oranle.practices.share_element.DetailActivity
@@ -28,8 +32,8 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         requestWindowFeature(Window.FEATURE_CONTENT_TRANSITIONS);
 
-        // 设置除了ShareElement外其他元素的退出方式
-        window.exitTransition = Slide(Gravity.START)
+        YcShareElement.enableContentTransition(application)
+        YcShareElement.setExitTransition(this, Slide(Gravity.LEFT))
 
         super.onCreate(savedInstanceState)
 
@@ -59,15 +63,24 @@ class LoginActivity : AppCompatActivity() {
         val icLauncherView = binding?.icLauncher as View
         val textView = binding?.desc as View
 
-        val transitionName = ViewCompat.getTransitionName(icLauncherView)
-        val pair1 = Pair(icLauncherView, transitionName)
+//        val transitionName = ViewCompat.getTransitionName(icLauncherView)
+//        val pair1 = Pair(icLauncherView, transitionName)
+//
+//        val transitionNameText = ViewCompat.getTransitionName(textView)
+//        val pair2 = Pair(textView, transitionNameText)
+//
+//        val activityOptionsCompat =
+//            ActivityOptionsCompat.makeSceneTransitionAnimation(this, pair1, pair2)
 
-        val transitionNameText = ViewCompat.getTransitionName(textView)
-        val pair2 = Pair(textView, transitionNameText)
+        val bundle = YcShareElement.buildOptionsBundle(this@LoginActivity) {
+            arrayOf(
+                ShareElementInfo<Nothing>(icLauncherView),
+                ShareElementInfo(textView, TextViewStateSaver())
+            )
+        }
 
-        val activityOptionsCompat =
-            ActivityOptionsCompat.makeSceneTransitionAnimation(this, pair1, pair2)
-        ActivityCompat.startActivity(this, intent, activityOptionsCompat.toBundle())
+
+        ActivityCompat.startActivity(this, intent, bundle)
     }
 
 }
